@@ -89,3 +89,24 @@ class LoginButton extends Component {
 The problem with this syntax, is that a different callback is created each time the `LoginButton` renders. In most cases, this is fine. However if this callback, is passed as a prop to lower components. those component might do an extra `re-rendering`, 
 
 **We generally, recommend binding in the constructor or using the class fields syntax, to avoid this sort of performance problem.**
+
+
+## Passing Arguments to Events
+
+Inside a loop, it is common to want to pass an extra parameter to an `Event Handler`, for example if `id` is the row `ID`, either of the following would work:
+
+```js
+<button onClick={(e) => this.deleteRow(id, e)}>
+  Delete Row
+</button>
+
+<button onClick={this.deleteRow.bind(this, id)}>
+  Delete Row
+</button>
+```
+
+The above two lines are equivalent.
+
+**in both cases, the `e` argument representing the React event will be passed as a second argument after the `ID`**
+
+**With an `arrow function` we have to pass it explicitly, but with `bind` any further arguments are automatically forwarded.**
