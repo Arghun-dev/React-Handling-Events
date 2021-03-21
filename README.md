@@ -65,3 +65,27 @@ class LoginButton extends Component {
   }
 }
 ```
+
+If you aren't using class fields syntax, you can use an arrow function in the callback.
+
+```js
+import { Component } from 'react'
+
+class LoginButton extends Component {
+  handleClick() {
+    console.log('this is:', this)
+  }
+  
+  render() {
+    return (
+      <button onClick={() => this.handleClick()}>
+        Click Me
+      </button>
+    )
+  }
+}
+```
+
+The problem with this syntax, is that a different callback is created each time the `LoginButton` renders. In most cases, this is fine. However if this callback, is passed as a prop to lower components. those component might do an extra `re-rendering`, 
+
+**We generally, recommend binding in the constructor or using the class fields syntax, to avoid this sort of performance problem.**
